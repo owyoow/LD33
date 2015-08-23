@@ -1,7 +1,10 @@
 var LD33 = {
 
-    TILESIZE: 64,
-    MONSTER_SPEED: 185
+    TILESIZE: 32,
+    MONSTER_SPEED: 212,
+    MAN_MIN_WALK_SPEED: 35,
+    MAN_MAX_WALK_SPEED: 85,
+    MAN_RUN_SPEED: 130
 };
 
 LD33.Boot = function (game)

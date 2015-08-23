@@ -12,7 +12,7 @@ LD33.Input = function (game)
 };
 
     
-LD33.Input.prototype.setupInput = function ()
+LD33.Input.prototype.setupInput = function (game)
 {
     var leftKey = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
     leftKey.onDown.add(this.leftDown, this);
@@ -33,6 +33,8 @@ LD33.Input.prototype.setupInput = function ()
     var scareKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     scareKey.onDown.add(this.scareDown, this);
     scareKey.onUp.add(this.scareUp, this);
+
+    
 };
     
 LD33.Input.prototype.leftDown = function ()

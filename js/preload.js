@@ -7,8 +7,8 @@ LD33.Preload.prototype = {
     
     preload: function ()
     {
-        this.load.image('tiles', 'assets/images/tiles.png');
-        this.load.atlasJSONHash('sheet', 'assets/images/sheet.png', 'assets/images/sheet.json');
+        this.load.image('tiles', 'assets/images/tileshalf.png');
+        this.load.atlasJSONHash('sheet', 'assets/images/sheethalf.png', 'assets/images/sheethalf.json');
         this.time.advancedTiming = true;
     },
     

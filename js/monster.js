@@ -9,12 +9,23 @@ LD33.Monster = function (game, gameInput, x, y, state)
 	this.anchor.setTo(0.5);
     this.game.physics.enable(this, Phaser.Physics.ARCADE);
 
-    this.firstInput = "none";
+    this.facingDirection = 'down';
+    this.firstInput = 'none';
 
     this.animations.add('down', ['monsterDown.png'], 20, false);
     this.animations.add('up', ['monsterUp.png'], 20, false);
     this.animations.add('left', ['monsterLeft.png'], 20, false);
     this.animations.add('right', ['monsterRight.png'], 20, false);
+    this.animations.add('downHit', ['monsterDown.png', 'monsterDownHit.png'], 20, true);
+    this.animations.add('upHit', ['monsterUp.png', 'monsterUpHit.png'], 20, true);
+    this.animations.add('leftHit', ['monsterLeft.png', 'monsterLeftHit.png'], 20, true);
+    this.animations.add('rightHit', ['monsterRight.png', 'monsterRightHit.png'], 20, true);
+
+    this.health = 3;
+
+    this.hasBeenHit = false;
+    this.invincibleTime = 2000;
+    this.invincibleTimer = 0;
 };
 
 LD33.Monster.prototype = Object.create(Phaser.Sprite.prototype);
@@ -22,6 +33,14 @@ LD33.Monster.prototype.constructor = LD33.Monster;
 
 LD33.Monster.prototype.update = function ()
 {
+    this.game.physics.arcade.collide(this, this.state.mapLayer);
+    this.game.physics.arcade.overlap(this, this.state.manGroup, this.hitEnemy, null, this);
+
+    if(this.invincibleTimer < this.game.time.now && this.hasBeenHit)
+    {
+        this.hasBeenHit = false;
+        this.setDirection(this.facingDirection, false);
+    }
 	this.body.velocity.x = 0;
     this.body.velocity.y = 0;
 
@@ -30,8 +49,8 @@ LD33.Monster.prototype.update = function ()
         this.body.velocity.x = -LD33.MONSTER_SPEED;
         if(this.firstInput === 'none' || this.firstInput === 'right')
         {
-        	this.animations.play('left');
-            this.firstInput = 'left';
+            this.facingDirection = 'left';
+        	this.setDirection(this.facingDirection, true);
         }
         
     }
@@ -40,8 +59,8 @@ LD33.Monster.prototype.update = function ()
         this.body.velocity.x = LD33.MONSTER_SPEED;
         if(this.firstInput === 'none' || this.firstInput === 'left')
         {
-            this.animations.play('right');
-            this.firstInput = 'right';
+            this.facingDirection = 'right';
+            this.setDirection(this.facingDirection, true);
         }
     }
     else
@@ -57,8 +76,8 @@ LD33.Monster.prototype.update = function ()
         this.body.velocity.y = -LD33.MONSTER_SPEED;
         if(this.firstInput === 'none' || this.firstInput === 'down')
         {
-            this.animations.play('up');
-            this.firstInput = 'up';
+            this.facingDirection = 'up';
+            this.setDirection(this.facingDirection, true);
         }
     }
     else if(this.gameInput.down)
@@ -66,8 +85,8 @@ LD33.Monster.prototype.update = function ()
         this.body.velocity.y = LD33.MONSTER_SPEED;
         if(this.firstInput === 'none' || this.firstInput === 'up')
         {
-            this.animations.play('down');
-            this.firstInput = 'down';
+            this.facingDirection = 'down';
+            this.setDirection(this.facingDirection, true);
         }
     }
     else
@@ -79,16 +98,83 @@ LD33.Monster.prototype.update = function ()
     }
 };
 
-LD33.Monster.prototype.changeBody = function (vertical)
+LD33.Monster.prototype.setDirection = function (dir, fromInput)
 {
-    if(vertical && !this.isVertical)
+    if(dir === 'down')
     {
-        this.isVertical = true;
-        this.body.setSize(16, 35, 0, 0);
+        if(this.hasBeenHit)
+        {
+            this.animations.play('downHit');
+        }
+        else
+        {
+            this.animations.play('down');
+        }
+
+        if(fromInput)
+        {
+            this.firstInput = 'down';
+        }
     }
-    else if(!vertical && this.isVertical)
+    else if(dir === 'up')
     {
-        this.isVertical = false;
-        this.body.setSize(35, 16, 0, 0);
+         if(this.hasBeenHit)
+        {
+            this.animations.play('upHit');
+        }
+        else
+        {
+            this.animations.play('up');
+        }
+
+        if(fromInput)
+        {
+            this.firstInput = 'up';
+        }
+    }
+    else if(dir === 'left')
+    {
+         if(this.hasBeenHit)
+        {
+            this.animations.play('leftHit');
+        }
+        else
+        {
+            this.animations.play('left');
+        }
+
+        if(fromInput)
+        {
+            this.firstInput = 'left';
+        }
+    }
+    else if(dir === 'right')
+    {
+         if(this.hasBeenHit)
+        {
+            this.animations.play('rightHit');
+        }
+        else
+        {
+            this.animations.play('right');
+        }
+
+        if(fromInput)
+        {
+            this.firstInput = 'right';
+        }
     }
 };
+
+LD33.Monster.prototype.hitEnemy = function (sprite1, sprite2)
+{
+    if(this.hasBeenHit)
+    {
+        return;
+    }
+
+    this.hasBeenHit = true;
+    this.invincibleTimer = this.game.time.now + this.invincibleTime;
+    this.setDirection(this.facingDirection, false);
+};
+
