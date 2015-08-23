@@ -244,4 +244,4 @@ LD33.Man.prototype.setTarget = function (pos)
 	var position = new Phaser.Point(pos.x * LD33.TILESIZE + LD33.TILESIZE * 0.5, pos.y * LD33.TILESIZE + LD33.TILESIZE * 0.5);
 	
 	return position;
-}
+};

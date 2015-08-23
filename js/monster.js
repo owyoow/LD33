@@ -16,16 +16,26 @@ LD33.Monster = function (game, gameInput, x, y, state)
     this.animations.add('up', ['monsterUp.png'], 20, false);
     this.animations.add('left', ['monsterLeft.png'], 20, false);
     this.animations.add('right', ['monsterRight.png'], 20, false);
-    this.animations.add('downHit', ['monsterDown.png', 'monsterDownHit.png'], 20, true);
-    this.animations.add('upHit', ['monsterUp.png', 'monsterUpHit.png'], 20, true);
-    this.animations.add('leftHit', ['monsterLeft.png', 'monsterLeftHit.png'], 20, true);
-    this.animations.add('rightHit', ['monsterRight.png', 'monsterRightHit.png'], 20, true);
+    this.animations.add('downHit', ['monsterDown.png', 'monsterDownHit.png'], 10, true);
+    this.animations.add('upHit', ['monsterUp.png', 'monsterUpHit.png'], 10, true);
+    this.animations.add('leftHit', ['monsterLeft.png', 'monsterLeftHit.png'], 10, true);
+    this.animations.add('rightHit', ['monsterRight.png', 'monsterRightHit.png'], 10, true);
 
-    this.health = 3;
+    this.health = 4;
 
     this.hasBeenHit = false;
     this.invincibleTime = 2000;
-    this.invincibleTimer = 0;
+    this.invincibleTimer = 0
+
+    this.canScare = true;
+    this.scareTimeOut = 2000;
+    this.scareCounter;
+
+    this.scareTime = 500;
+    this.scareTimer;
+
+    this.scare;
+
 };
 
 LD33.Monster.prototype = Object.create(Phaser.Sprite.prototype);
@@ -33,6 +43,12 @@ LD33.Monster.prototype.constructor = LD33.Monster;
 
 LD33.Monster.prototype.update = function ()
 {
+    if(this.scare)
+    {
+        this.scare.x = this.x;
+        this.scare.y = this.y;
+    }
+
     this.game.physics.arcade.collide(this, this.state.mapLayer);
     this.game.physics.arcade.overlap(this, this.state.manGroup, this.hitEnemy, null, this);
 
@@ -95,6 +111,26 @@ LD33.Monster.prototype.update = function ()
         {
             this.firstInput = 'none';
         }
+    }
+
+    if(this.gameInput.scare && this.canScare)
+    {
+        this.startScare();
+    }
+
+    if(this.canScare)
+    {
+        return;
+    }
+
+    if(this.scareTimer < this.game.time.now && this.scare != null)
+    {
+        this.scare.kill();
+    }
+
+    if(this.scareCounter < this.game.time.now)
+    {
+        this.canScare = true;
     }
 };
 
@@ -166,13 +202,28 @@ LD33.Monster.prototype.setDirection = function (dir, fromInput)
     }
 };
 
+LD33.Monster.prototype.startScare = function ()
+{
+    this.canScare = false;
+    this.scare = this.state.screamGroup.getFirstExists(false);
+    this.scare.reset(this.x, this.y);
+    this.scareCounter = this.game.time.now + this.scareTimeOut;
+    this.scareTimer = this.game.time.now + this.scareTime;
+}
+
 LD33.Monster.prototype.hitEnemy = function (sprite1, sprite2)
 {
     if(this.hasBeenHit)
     {
         return;
     }
+    this.health--;
+    this.state.updateHearts();
 
+    if(this.health <= 0)
+    {
+        this.game.state.restart();
+    }
     this.hasBeenHit = true;
     this.invincibleTimer = this.game.time.now + this.invincibleTime;
     this.setDirection(this.facingDirection, false);

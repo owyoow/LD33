@@ -1,8 +1,16 @@
 {"frames": {
 
+"heart.png":
+{
+	"frame": {"x":55,"y":4,"w":45,"h":45},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":45,"h":45},
+	"sourceSize": {"w":45,"h":45}
+},
 "manDown.png":
 {
-	"frame": {"x":4,"y":364,"w":16,"h":26},
+	"frame": {"x":412,"y":4,"w":16,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":26},
@@ -10,7 +18,7 @@
 },
 "manLeft.png":
 {
-	"frame": {"x":4,"y":332,"w":16,"h":26},
+	"frame": {"x":390,"y":4,"w":16,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":26},
@@ -18,7 +26,7 @@
 },
 "manRight.png":
 {
-	"frame": {"x":4,"y":300,"w":16,"h":26},
+	"frame": {"x":368,"y":4,"w":16,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":26},
@@ -26,7 +34,7 @@
 },
 "manUp.png":
 {
-	"frame": {"x":4,"y":268,"w":16,"h":26},
+	"frame": {"x":346,"y":4,"w":16,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":26},
@@ -34,7 +42,7 @@
 },
 "monsterDown.png":
 {
-	"frame": {"x":4,"y":235,"w":24,"h":27},
+	"frame": {"x":316,"y":4,"w":24,"h":27},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":27},
@@ -42,7 +50,7 @@
 },
 "monsterDownHit.png":
 {
-	"frame": {"x":4,"y":202,"w":24,"h":27},
+	"frame": {"x":286,"y":4,"w":24,"h":27},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":27},
@@ -50,7 +58,7 @@
 },
 "monsterLeft.png":
 {
-	"frame": {"x":4,"y":169,"w":24,"h":27},
+	"frame": {"x":256,"y":4,"w":24,"h":27},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":27},
@@ -58,7 +66,7 @@
 },
 "monsterLeftHit.png":
 {
-	"frame": {"x":4,"y":136,"w":24,"h":27},
+	"frame": {"x":226,"y":4,"w":24,"h":27},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":27},
@@ -66,7 +74,7 @@
 },
 "monsterRight.png":
 {
-	"frame": {"x":4,"y":103,"w":24,"h":27},
+	"frame": {"x":196,"y":4,"w":24,"h":27},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":27},
@@ -74,7 +82,7 @@
 },
 "monsterRightHit.png":
 {
-	"frame": {"x":4,"y":70,"w":24,"h":27},
+	"frame": {"x":166,"y":4,"w":24,"h":27},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":27},
@@ -82,7 +90,7 @@
 },
 "monsterUp.png":
 {
-	"frame": {"x":4,"y":37,"w":24,"h":27},
+	"frame": {"x":136,"y":4,"w":24,"h":27},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":27},
@@ -90,19 +98,27 @@
 },
 "monsterUpHit.png":
 {
-	"frame": {"x":4,"y":4,"w":24,"h":27},
+	"frame": {"x":106,"y":4,"w":24,"h":27},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":27},
 	"sourceSize": {"w":24,"h":27}
+},
+"scream.png":
+{
+	"frame": {"x":4,"y":4,"w":45,"h":45},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":45,"h":45},
+	"sourceSize": {"w":45,"h":45}
 }},
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker ",
 	"version": "1.0",
 	"image": "sheethalf.png",
 	"format": "RGBA8888",
-	"size": {"w":32,"h":394},
+	"size": {"w":432,"h":53},
 	"scale": "0.5",
-	"smartupdate": "$TexturePacker:SmartUpdate:565c6f0fc92b7a28925f340f57289a9f:8ecb99a13763555d810a0bd5145232ba:2b27a7fca760cded30b71ba6d22a7768$"
+	"smartupdate": "$TexturePacker:SmartUpdate:f4db867819b6fc968cb05b71cc9ca6c8:ad13edad752cff6db9fe4a2b0af6bbf9:2b27a7fca760cded30b71ba6d22a7768$"
 }
 }

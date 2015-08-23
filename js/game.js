@@ -72,11 +72,28 @@ LD33.Game.prototype = {
         this.monster = new LD33.Monster(this.game, this.gameInput, playerPos.x, playerPos.y, this);
 
         this.camera.follow(this.monster, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+
+        this.heartGroup = this.add.group();
+        this.heartGroup.fixedToCamera = true;
+        this.heartGroup.createMultiple(10, 'sheet', 'heart.png');
+        this.heartGroup.setAll('anchor.x', 0.5);
+        this.heartGroup.setAll('anchor.y', 0.5);
+        this.updateHearts();
+
+        this.screamGroup = this.add.group();
+        this.screamGroup.enableBody = true;
+        this.screamGroup.physicsBodyType = Phaser.Physics.ARCADE;
+        this.screamGroup.createMultiple(2, 'sheet', 'scream.png');
+        this.screamGroup.setAll('anchor.x', 0.5);
+        this.screamGroup.setAll('anchor.y', 0.5);
+        
+
+
     },
     
     update: function ()
     {
-
+        this.physics.arcade.overlap(this.manGroup, this.screamGroup, this.screamHit, null, this);
     },
     
     render: function ()
@@ -84,5 +101,32 @@ LD33.Game.prototype = {
         this.game.debug.text(this.time.fps || '--', 2, 14, '#00ff00');
 
         //this.game.debug.body(this.monster);
+
+    },
+
+    updateHearts: function ()
+    {
+        var offset = 50;
+        var xPos = 30;
+
+        this.heartGroup.forEachAlive(function(heart)
+        {
+            heart.kill();
+        }, this);
+
+        for(var i = 0; i < this.monster.health; i++)
+        {
+            this.heart = this.heartGroup.getFirstExists(false);
+            this.heart.reset(xPos, 30);
+            xPos += offset
+        }
+    },
+
+    screamHit: function (sprite1, sprite2)
+    {
+        if(!sprite1.isFollowing)
+        {
+            sprite1.kill();
+        }
     }
 };
