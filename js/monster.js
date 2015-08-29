@@ -227,5 +227,7 @@ LD33.Monster.prototype.hitEnemy = function (sprite1, sprite2)
     this.hasBeenHit = true;
     this.invincibleTimer = this.game.time.now + this.invincibleTime;
     this.setDirection(this.facingDirection, false);
+
+    sprite2.isFollowing = true;
 };
 

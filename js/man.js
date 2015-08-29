@@ -27,7 +27,7 @@ LD33.Man = function (game, x, y, state)
 	this.collisionTimer = this.game.time.now + this.collisionTimeOut;
 
 	this.maxPointRadius = 10;
-	this.attackDistance = 160;
+	this.attackDistance = 200;
 
 	this.isFollowing = false;
 };
@@ -45,8 +45,8 @@ LD33.Man.prototype.update = function ()
 
 	if(dist < this.attackDistance && !this.isFollowing)
 	{
-		if((this.facingDirection === 'down' && angle > 45 && angle < 135) || (this.facingDirection === 'up' && angle > -135 && angle < -45) ||
-		   (this.facingDirection === 'right' && angle > -45 && angle < 45) || (this.facingDirection === 'left') && ((angle > 135 && angle < 180) || (angle > -180 && angle < -135)))
+		if((this.facingDirection === 'down' && angle > 35 && angle < 145) || (this.facingDirection === 'up' && angle > -145 && angle < -35) ||
+		   (this.facingDirection === 'right' && angle > -35 && angle < 35) || (this.facingDirection === 'left') && ((angle > 145 && angle < 180) || (angle > -180 && angle < -145)))
 		{
 			this.isFollowing = true;
 		}

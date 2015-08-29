@@ -4,7 +4,7 @@ var LD33 = {
     MONSTER_SPEED: 212,
     MAN_MIN_WALK_SPEED: 35,
     MAN_MAX_WALK_SPEED: 85,
-    MAN_RUN_SPEED: 130
+    MAN_RUN_SPEED: 150
 };
 
 LD33.Boot = function (game)
